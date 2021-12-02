@@ -463,21 +463,21 @@ Fairfield,2018,NA,NA,NA
 Fairfield,2019,NA,NA,NA
 Fort Kent U.D.,1987,NA,10,6
 Fort Kent U.D.,1988,NA,10,6
-Fort Kent U.D.,1989,NA,NA,NA
-Fort Kent U.D.,1990,NA,NA,NA
-Fort Kent U.D.,1991,NA,NA,NA
-Fort Kent U.D.,1992,NA,NA,NA
-Fort Kent U.D.,1993,NA,NA,NA
-Fort Kent U.D.,1994,NA,NA,NA
-Fort Kent U.D.,1995,NA,NA,NA
-Fort Kent U.D.,1996,NA,NA,NA
-Fort Kent U.D.,1997,3000,NA,NA
-Fort Kent U.D.,1998,3000,NA,NA
-Fort Kent U.D.,1999,0,NA,NA
-Fort Kent U.D.,2000,2200,NA,NA
-Fort Kent U.D.,2001,0,NA,NA
-Fort Kent U.D.,2002,0,NA,1
-Fort Kent U.D.,2003,2400,NA,1
+Fort Kent U.D.,1989,NA,10,NA
+Fort Kent U.D.,1990,NA,10,NA
+Fort Kent U.D.,1991,NA,10,NA
+Fort Kent U.D.,1992,NA,10,NA
+Fort Kent U.D.,1993,NA,10,NA
+Fort Kent U.D.,1994,NA,10,NA
+Fort Kent U.D.,1995,NA,10,NA
+Fort Kent U.D.,1996,NA,10,NA
+Fort Kent U.D.,1997,3000,0,NA
+Fort Kent U.D.,1998,3000,2,NA
+Fort Kent U.D.,1999,0,0,NA
+Fort Kent U.D.,2000,2200,0,NA
+Fort Kent U.D.,2001,0,2,NA
+Fort Kent U.D.,2002,0,1,1
+Fort Kent U.D.,2003,2400,4,1
 Fort Kent U.D.,2004,41000,NA,1
 Fort Kent U.D.,2005,600000,4,1
 Fort Kent U.D.,2006,NA,NA,1
@@ -494,39 +494,6 @@ Fort Kent U.D.,2016,NA,NA,NA
 Fort Kent U.D.,2017,NA,NA,NA
 Fort Kent U.D.,2018,NA,NA,NA
 Fort Kent U.D.,2019,NA,NA,NA
-Fort KentU.D.,1987,NA,NA,NA
-Fort KentU.D.,1988,NA,NA,NA
-Fort KentU.D.,1989,NA,10,NA
-Fort KentU.D.,1990,NA,10,NA
-Fort KentU.D.,1991,NA,10,NA
-Fort KentU.D.,1992,NA,10,NA
-Fort KentU.D.,1993,NA,10,NA
-Fort KentU.D.,1994,NA,10,NA
-Fort KentU.D.,1995,NA,10,NA
-Fort KentU.D.,1996,NA,10,NA
-Fort KentU.D.,1997,NA,0,NA
-Fort KentU.D.,1998,NA,2,NA
-Fort KentU.D.,1999,NA,0,NA
-Fort KentU.D.,2000,NA,0,NA
-Fort KentU.D.,2001,NA,2,NA
-Fort KentU.D.,2002,NA,1,NA
-Fort KentU.D.,2003,NA,4,NA
-Fort KentU.D.,2004,NA,NA,NA
-Fort KentU.D.,2005,NA,NA,NA
-Fort KentU.D.,2006,NA,NA,NA
-Fort KentU.D.,2007,NA,NA,NA
-Fort KentU.D.,2008,NA,NA,NA
-Fort KentU.D.,2009,NA,NA,NA
-Fort KentU.D.,2010,NA,NA,NA
-Fort KentU.D.,2011,NA,NA,NA
-Fort KentU.D.,2012,NA,NA,NA
-Fort KentU.D.,2013,NA,NA,NA
-Fort KentU.D.,2014,NA,NA,NA
-Fort KentU.D.,2015,NA,NA,NA
-Fort KentU.D.,2016,NA,NA,NA
-Fort KentU.D.,2017,NA,NA,NA
-Fort KentU.D.,2018,NA,NA,NA
-Fort KentU.D.,2019,NA,NA,NA
 Gardiner,1987,NA,40,2
 Gardiner,1988,NA,40,2
 Gardiner,1989,NA,40,NA
@@ -1440,22 +1407,22 @@ South Portland,2018,3533710,4,4
 South Portland,2019,8651990,3,4
 Westbrook,1987,NA,50,7
 Westbrook,1988,NA,50,7
-Westbrook,1989,NA,NA,NA
-Westbrook,1990,NA,NA,NA
-Westbrook,1991,NA,NA,NA
-Westbrook,1992,NA,NA,NA
-Westbrook,1993,NA,NA,NA
-Westbrook,1994,NA,NA,NA
-Westbrook,1995,NA,NA,NA
-Westbrook,1996,NA,NA,NA
-Westbrook,1997,38407000,NA,NA
-Westbrook,1998,49090000,NA,NA
-Westbrook,1999,21391000,NA,NA
-Westbrook,2000,1229000,NA,NA
-Westbrook,2001,2187000,NA,NA
-Westbrook,2002,271000,NA,5
-Westbrook,2003,7000,NA,5
-Westbrook,2004,944000,NA,5
+Westbrook,1989,NA,50,NA
+Westbrook,1990,NA,50,NA
+Westbrook,1991,NA,50,NA
+Westbrook,1992,NA,50,NA
+Westbrook,1993,NA,50,NA
+Westbrook,1994,NA,50,NA
+Westbrook,1995,NA,50,NA
+Westbrook,1996,NA,50,NA
+Westbrook,1997,38407000,34,NA
+Westbrook,1998,49090000,30,NA
+Westbrook,1999,21391000,19,NA
+Westbrook,2000,1229000,16,NA
+Westbrook,2001,2187000,15,NA
+Westbrook,2002,271000,33,5
+Westbrook,2003,7000,7,5
+Westbrook,2004,944000,13,5
 Westbrook,2005,11119000,17,5
 Westbrook,2006,40636729,31,5
 Westbrook,2007,15879000,55,5
@@ -1471,39 +1438,6 @@ Westbrook,2016,7447100,38,5
 Westbrook,2017,1285000,2,5
 Westbrook,2018,1631000,6,5
 Westbrook,2019,9816000,4,5
-Westbrook (PWD),1987,NA,NA,NA
-Westbrook (PWD),1988,NA,NA,NA
-Westbrook (PWD),1989,NA,50,NA
-Westbrook (PWD),1990,NA,50,NA
-Westbrook (PWD),1991,NA,50,NA
-Westbrook (PWD),1992,NA,50,NA
-Westbrook (PWD),1993,NA,50,NA
-Westbrook (PWD),1994,NA,50,NA
-Westbrook (PWD),1995,NA,50,NA
-Westbrook (PWD),1996,NA,50,NA
-Westbrook (PWD),1997,NA,34,NA
-Westbrook (PWD),1998,NA,30,NA
-Westbrook (PWD),1999,NA,19,NA
-Westbrook (PWD),2000,NA,16,NA
-Westbrook (PWD),2001,NA,15,NA
-Westbrook (PWD),2002,NA,33,NA
-Westbrook (PWD),2003,NA,7,NA
-Westbrook (PWD),2004,NA,13,NA
-Westbrook (PWD),2005,NA,NA,NA
-Westbrook (PWD),2006,NA,NA,NA
-Westbrook (PWD),2007,NA,NA,NA
-Westbrook (PWD),2008,NA,NA,NA
-Westbrook (PWD),2009,NA,NA,NA
-Westbrook (PWD),2010,NA,NA,NA
-Westbrook (PWD),2011,NA,NA,NA
-Westbrook (PWD),2012,NA,NA,NA
-Westbrook (PWD),2013,NA,NA,NA
-Westbrook (PWD),2014,NA,NA,NA
-Westbrook (PWD),2015,NA,NA,NA
-Westbrook (PWD),2016,NA,NA,NA
-Westbrook (PWD),2017,NA,NA,NA
-Westbrook (PWD),2018,NA,NA,NA
-Westbrook (PWD),2019,NA,NA,NA
 Winslow,1987,NA,20,2
 Winslow,1988,NA,20,2
 Winslow,1989,NA,20,NA

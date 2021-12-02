@@ -2,17 +2,17 @@ Preparation of Maine DEP Annual CSO Data
 ================
 Curtis C. Bohlen, Casco Bay Estuary Partnership
 
-  - [Load Libraries](#load-libraries)
-  - [Load Data](#load-data)
-      - [2019 Report Data](#report-data)
-      - [2008 Report Data](#report-data-1)
-      - [Harmonize Names](#harmonize-names)
-          - [Check Results](#check-results)
-      - [Remove the Permit Numbers](#remove-the-permit-numbers)
-  - [Save Data to File](#save-data-to-file)
-  - [Identify Casco Bay CSO Communities by
+-   [Load Libraries](#load-libraries)
+-   [Load Data](#load-data)
+    -   [2019 Report Data](#2019-report-data)
+    -   [2008 Report Data](#2008-report-data)
+    -   [Harmonize Names](#harmonize-names)
+        -   [Check Results](#check-results)
+    -   [Remove the Permit Numbers](#remove-the-permit-numbers)
+-   [Save Data to File](#save-data-to-file)
+-   [Identify Casco Bay CSO Communities by
     Name](#identify-casco-bay-cso-communities-by-name)
-  - [Which Years](#which-years)
+-   [Which Years](#which-years)
 
 <img
     src="https://www.cascobayestuary.org/wp-content/uploads/2014/04/logo_sm.jpg"
@@ -22,12 +22,19 @@ Curtis C. Bohlen, Casco Bay Estuary Partnership
 
 ``` r
 library(tidyverse)
-#> -- Attaching packages --------------------------------------------------------------------- tidyverse 1.3.0 --
-#> v ggplot2 3.3.2     v purrr   0.3.4
-#> v tibble  3.0.3     v dplyr   1.0.2
-#> v tidyr   1.1.2     v stringr 1.4.0
-#> v readr   1.3.1     v forcats 0.5.0
-#> -- Conflicts ------------------------------------------------------------------------ tidyverse_conflicts() --
+#> Warning: package 'tidyverse' was built under R version 4.0.5
+#> -- Attaching packages --------------------------------------- tidyverse 1.3.1 --
+#> v ggplot2 3.3.5     v purrr   0.3.4
+#> v tibble  3.1.4     v dplyr   1.0.7
+#> v tidyr   1.1.3     v stringr 1.4.0
+#> v readr   2.0.1     v forcats 0.5.1
+#> Warning: package 'ggplot2' was built under R version 4.0.5
+#> Warning: package 'tibble' was built under R version 4.0.5
+#> Warning: package 'tidyr' was built under R version 4.0.5
+#> Warning: package 'readr' was built under R version 4.0.5
+#> Warning: package 'dplyr' was built under R version 4.0.5
+#> Warning: package 'forcats' was built under R version 4.0.5
+#> -- Conflicts ------------------------------------------ tidyverse_conflicts() --
 #> x dplyr::filter() masks stats::filter()
 #> x dplyr::lag()    masks stats::lag()
 library(readxl)
@@ -90,8 +97,6 @@ dep_2008_Vol_data <- read_excel("2008_Report_Data.xlsx",
     filter(! grepl('Total', Community))
 #> Warning in read_fun(path = enc2native(normalizePath(path)), sheet_i = sheet, :
 #> Expecting numeric in X19 / R19C24: got '-'
-
-
 dep_2008_Event_data <- read_excel("2008_Report_Data.xlsx",
                                   sheet = 'Events 2008',
                                 col_types = c('text', 'text',
@@ -111,12 +116,16 @@ setdiff(dep_2019_Vol_data$Community, dep_2008_Vol_data$Community)
 #> [1] "Cape Elizabeth"             "Hallowell W.D. - 2008 GAUD"
 setdiff(dep_2008_Vol_data$Community, dep_2019_Vol_data$Community)
 #> [1] "Cape Elizabeth (PWD)"     "Hallowell W.D.-2008 GAUD"
+```
 
+``` r
 setdiff(dep_2019_Event_data$Community, dep_2008_Event_data$Community)
 #> [1] "Cape Elizabeth" "Fort Kent U.D."
 setdiff(dep_2008_Event_data$Community, dep_2019_Event_data$Community)
 #> [1] "Cape Elizabeth (PWD)" "Fort KentU.D."
+```
 
+``` r
 setdiff(dep_2019_Vol_data$Community, dep_2019_Event_data$Community)
 #> [1] "Westbrook"
 setdiff(dep_2019_Event_data$Community, dep_2019_Vol_data$Community)
@@ -124,7 +133,10 @@ setdiff(dep_2019_Event_data$Community, dep_2019_Vol_data$Community)
 ```
 
 ``` r
-
+dep_2008_Vol_data$Community[dep_2008_Vol_data$Community == 
+                               "Westbrook (PWD)"] <- "Westbrook"
+dep_2008_Event_data$Community[dep_2008_Event_data$Community == 
+                               "Westbrook (PWD)"] <- "Westbrook"
 dep_2019_Event_data$Community[dep_2019_Event_data$Community == 
                               "Westbrook (PWD)"] <- "Westbrook"
 dep_2019_Outfall_data$Community[dep_2019_Outfall_data$Community == 
@@ -134,19 +146,13 @@ dep_2008_Vol_data$Community[dep_2008_Vol_data$Community ==
                               "Cape Elizabeth (PWD)"] <- "Cape Elizabeth"
 dep_2008_Vol_data$Community[dep_2008_Vol_data$Community == 
                               "Hallowell W.D.-2008 GAUD"] <- "Hallowell W.D. - 2008 GAUD"
-dep_2008_Vol_data$Community[dep_2008_Vol_data$Community == 
-                              "Cape Elizabeth (PWD)"] <- "Cape Elizabeth"
-dep_2008_Vol_data$Community[dep_2008_Vol_data$Community == 
-                             "Hallowell W.D.-2008 GAUD"] <- "Hallowell W.D. - 2008 GAUD"
 
 dep_2008_Event_data$Community[dep_2008_Event_data$Community == 
                               "Cape Elizabeth (PWD)"] <- "Cape Elizabeth"
 dep_2008_Event_data$Community[dep_2008_Event_data$Community == 
                               "Hallowell W.D.-2008 GAUD"] <- "Hallowell W.D. - 2008 GAUD"
 dep_2008_Event_data$Community[dep_2008_Event_data$Community == 
-                              "Cape Elizabeth (PWD)"] <- "Cape Elizabeth"
-dep_2008_Event_data$Community[dep_2008_Event_data$Community == 
-                             "Hallowell W.D.-2008 GAUD"] <- "Hallowell W.D. - 2008 GAUD"
+                             "Fort KentU.D."] <- "Fort Kent U.D."
 ```
 
 ### Check Results
@@ -155,6 +161,20 @@ dep_2008_Event_data$Community[dep_2008_Event_data$Community ==
 setdiff(dep_2019_Vol_data$Community, dep_2008_Vol_data$Community)
 #> character(0)
 setdiff(dep_2008_Vol_data$Community, dep_2019_Vol_data$Community)
+#> character(0)
+```
+
+``` r
+setdiff(dep_2019_Event_data$Community, dep_2008_Event_data$Community)
+#> character(0)
+setdiff(dep_2008_Event_data$Community, dep_2019_Event_data$Community)
+#> character(0)
+```
+
+``` r
+setdiff(dep_2019_Vol_data$Community, dep_2019_Event_data$Community)
+#> character(0)
+setdiff(dep_2019_Event_data$Community, dep_2019_Vol_data$Community)
 #> character(0)
 ```
 
@@ -193,7 +213,6 @@ the_data <- vol_data %>%
   full_join(event_data, by = c("Community", "Year")) %>%
   full_join(outfall_data, by = c("Community", "Year"))  %>%
   arrange(Community, Year)
-  
 ```
 
 ``` r
@@ -236,7 +255,7 @@ knitr::kable(first_measured, caption = "Year CSO volumes were first regularly me
 ```
 
 | Town           | Year |
-| :------------- | ---: |
+|:---------------|-----:|
 | Cape Elizabeth | 2002 |
 | Portland & PWD | 1997 |
 | South Portland | 1997 |
@@ -246,4 +265,4 @@ knitr::kable(first_measured, caption = "Year CSO volumes were first regularly me
 Year CSO volumes were first regularly measured.
 
 But the vast majority of volumes are from sites that have been measured
-since 1997, so we track the data only since then. By doing so, I am
+since 1997, so we track the data only since then.

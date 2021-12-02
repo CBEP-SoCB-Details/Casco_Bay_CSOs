@@ -78,15 +78,25 @@ dep_2008_Event_data <- read_excel("2008_Report_Data.xlsx",
 ```{r names_1}
 setdiff(dep_2019_Vol_data$Community, dep_2008_Vol_data$Community)
 setdiff(dep_2008_Vol_data$Community, dep_2019_Vol_data$Community)
+```
 
+```{r}
 setdiff(dep_2019_Event_data$Community, dep_2008_Event_data$Community)
 setdiff(dep_2008_Event_data$Community, dep_2019_Event_data$Community)
+```
 
+```{r}
 setdiff(dep_2019_Vol_data$Community, dep_2019_Event_data$Community)
 setdiff(dep_2019_Event_data$Community, dep_2019_Vol_data$Community)
 ```
+
+
 ```{r names_2}
 
+dep_2008_Vol_data$Community[dep_2008_Vol_data$Community == 
+                               "Westbrook (PWD)"] <- "Westbrook"
+dep_2008_Event_data$Community[dep_2008_Event_data$Community == 
+                               "Westbrook (PWD)"] <- "Westbrook"
 dep_2019_Event_data$Community[dep_2019_Event_data$Community == 
                               "Westbrook (PWD)"] <- "Westbrook"
 dep_2019_Outfall_data$Community[dep_2019_Outfall_data$Community == 
@@ -96,25 +106,30 @@ dep_2008_Vol_data$Community[dep_2008_Vol_data$Community ==
                               "Cape Elizabeth (PWD)"] <- "Cape Elizabeth"
 dep_2008_Vol_data$Community[dep_2008_Vol_data$Community == 
                               "Hallowell W.D.-2008 GAUD"] <- "Hallowell W.D. - 2008 GAUD"
-dep_2008_Vol_data$Community[dep_2008_Vol_data$Community == 
-                              "Cape Elizabeth (PWD)"] <- "Cape Elizabeth"
-dep_2008_Vol_data$Community[dep_2008_Vol_data$Community == 
-                             "Hallowell W.D.-2008 GAUD"] <- "Hallowell W.D. - 2008 GAUD"
 
 dep_2008_Event_data$Community[dep_2008_Event_data$Community == 
                               "Cape Elizabeth (PWD)"] <- "Cape Elizabeth"
 dep_2008_Event_data$Community[dep_2008_Event_data$Community == 
                               "Hallowell W.D.-2008 GAUD"] <- "Hallowell W.D. - 2008 GAUD"
 dep_2008_Event_data$Community[dep_2008_Event_data$Community == 
-                              "Cape Elizabeth (PWD)"] <- "Cape Elizabeth"
-dep_2008_Event_data$Community[dep_2008_Event_data$Community == 
-                             "Hallowell W.D.-2008 GAUD"] <- "Hallowell W.D. - 2008 GAUD"
+                             "Fort KentU.D."] <- "Fort Kent U.D."
+
 ```
 
 ### Check Results
-```{r names_3}
+
+```{r}
 setdiff(dep_2019_Vol_data$Community, dep_2008_Vol_data$Community)
 setdiff(dep_2008_Vol_data$Community, dep_2019_Vol_data$Community)
+```
+
+```{r}
+setdiff(dep_2019_Event_data$Community, dep_2008_Event_data$Community)
+setdiff(dep_2008_Event_data$Community, dep_2019_Event_data$Community)
+```
+```{r}
+setdiff(dep_2019_Vol_data$Community, dep_2019_Event_data$Community)
+setdiff(dep_2019_Event_data$Community, dep_2019_Vol_data$Community)
 ```
 ## Remove the Permit Numbers
 ```{r rm_permit_num}
@@ -150,8 +165,6 @@ the_data <- vol_data %>%
   full_join(event_data, by = c("Community", "Year")) %>%
   full_join(outfall_data, by = c("Community", "Year"))  %>%
   arrange(Community, Year)
-  
-
 ```
 
 ```{r rm_extras}
@@ -190,6 +203,6 @@ first_measured <- tribble(~Town, ~Year,
 knitr::kable(first_measured, caption = "Year CSO volumes were first regularly measured.")
 ```
 But the vast majority of volumes are from sites that have been measured
-since 1997, so we track the data only since then.  By doing so, I am
+since 1997, so we track the data only since then.
 
 

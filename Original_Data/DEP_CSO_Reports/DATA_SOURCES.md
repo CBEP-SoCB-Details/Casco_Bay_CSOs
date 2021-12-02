@@ -8,7 +8,7 @@
 ## Source
 Maine Department of Environmental Protection provides annual CSO 
 monitoring reports, which include large data tables showing measured or
-estimated CSO VOlumes going back to teh late 1980s.
+estimated CSO VOlumes going back to the late 1980s.
 
 CSO Reports URL: https://www.maine.gov/dep/water/cso/#supp
 
