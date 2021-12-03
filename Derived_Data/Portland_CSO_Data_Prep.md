@@ -2,36 +2,36 @@ Preparation of Portland CSO Data
 ================
 Curtis C. Bohlen, Casco Bay Estuary Partnership
 
-  - [Load Libraries](#load-libraries)
-  - [Establish Folder Reference](#establish-folder-reference)
-  - [Read Rain Data](#read-rain-data)
-      - [Find the Rain Files.](#find-the-rain-files.)
-      - [Read Each Rain File](#read-each-rain-file)
-  - [Write Rainfall Data File](#write-rainfall-data-file)
-      - [Combine Data](#combine-data)
-  - [Load CSO Event Files](#load-cso-event-files)
-      - [Collect File Names](#collect-file-names)
-          - [Code to Extract Year From Each
+-   [Load Libraries](#load-libraries)
+-   [Establish Folder Reference](#establish-folder-reference)
+-   [Read Rain Data](#read-rain-data)
+    -   [Find the Rain Files.](#find-the-rain-files)
+    -   [Read Each Rain File](#read-each-rain-file)
+-   [Write Rainfall Data File](#write-rainfall-data-file)
+    -   [Combine Data](#combine-data)
+-   [Load CSO Event Files](#load-cso-event-files)
+    -   [Collect File Names](#collect-file-names)
+        -   [Code to Extract Year From Each
             Filename](#code-to-extract-year-from-each-filename)
-      - [Read in 2015 Data](#read-in-2015-data)
-          - [List Locations](#list-locations)
-          - [Read 2015 Data](#read-2015-data)
-          - [Error Correction](#error-correction)
-          - [Reprocess to Match Other File
+    -   [Read in 2015 Data](#read-in-2015-data)
+        -   [List Locations](#list-locations)
+        -   [Read 2015 Data](#read-2015-data)
+        -   [Error Correction](#error-correction)
+        -   [Reprocess to Match Other File
             Format](#reprocess-to-match-other-file-format)
-          - [Which CSOs Were Monitored All Year in
+        -   [Which CSOs Were Monitored All Year in
             2015?](#which-csos-were-monitored-all-year-in-2015)
-      - [Read the Other Files](#read-the-other-files)
-          - [2016 Data](#data)
-          - [2017 Data](#data-1)
-          - [2018 Data](#data-2)
-          - [2019 Data](#data-3)
-  - [Save Five Years of Portland CSO Event
+    -   [Read the Other Files](#read-the-other-files)
+        -   [2016 Data](#2016-data)
+        -   [2017 Data](#2017-data)
+        -   [2018 Data](#2018-data)
+        -   [2019 Data](#2019-data)
+-   [Save Five Years of Portland CSO Event
     Data](#save-five-years-of-portland-cso-event-data)
-      - [Combine Data](#combine-data-1)
-  - [Export Data for GIS](#export-data-for-gis)
-      - [Calculate Totals by CSO](#calculate-totals-by-cso)
-      - [Export File](#export-file)
+    -   [Combine Data](#combine-data-1)
+-   [Export Data for GIS](#export-data-for-gis)
+    -   [Calculate Totals by CSO](#calculate-totals-by-cso)
+    -   [Export File](#export-file)
 
 <img
     src="https://www.cascobayestuary.org/wp-content/uploads/2014/04/logo_sm.jpg"
@@ -43,14 +43,24 @@ Curtis C. Bohlen, Casco Bay Estuary Partnership
 library(tidyverse)
 ```
 
-    ## -- Attaching packages ------------------------------------------------------------------- tidyverse 1.3.0 --
+    ## Warning: package 'tidyverse' was built under R version 4.0.5
 
-    ## v ggplot2 3.3.2     v purrr   0.3.4
-    ## v tibble  3.0.3     v dplyr   1.0.2
-    ## v tidyr   1.1.2     v stringr 1.4.0
-    ## v readr   1.3.1     v forcats 0.5.0
+    ## -- Attaching packages --------------------------------------- tidyverse 1.3.1 --
 
-    ## -- Conflicts ---------------------------------------------------------------------- tidyverse_conflicts() --
+    ## v ggplot2 3.3.5     v purrr   0.3.4
+    ## v tibble  3.1.6     v dplyr   1.0.7
+    ## v tidyr   1.1.4     v stringr 1.4.0
+    ## v readr   2.1.0     v forcats 0.5.1
+
+    ## Warning: package 'ggplot2' was built under R version 4.0.5
+
+    ## Warning: package 'tidyr' was built under R version 4.0.5
+
+    ## Warning: package 'dplyr' was built under R version 4.0.5
+
+    ## Warning: package 'forcats' was built under R version 4.0.5
+
+    ## -- Conflicts ------------------------------------------ tidyverse_conflicts() --
     ## x dplyr::filter() masks stats::filter()
     ## x dplyr::lag()    masks stats::lag()
 
@@ -74,7 +84,7 @@ Notice that the DATES in these excel files are incorrect. They are
 displayed in the spreadsheets as dates, showing only Month and Day, but
 the underlying data is not necessarily from the year the data
 represents. To correct for that, I assemble the date from day, month,
-and
+and year.
 
 ## Find the Rain Files.
 
@@ -1698,7 +1708,7 @@ drop anyway.
 
 ## Combine Data
 
-There aught to be a way to automate this step so I don’t have to write
+There ought to be a way to automate this step so I don’t have to write
 out each name.
 
 ``` r
@@ -1766,7 +1776,7 @@ reported over multiple days.)
 Note also that the EEWTF wet weather flows are NOT reported by event.
 
 Also note that there are non-numeric entries in the table which are
-informative, describing managmeent of teh CSOs. Those entries will not
+informative, describing managment of the CSOs. Those entries will not
 read correctly here. Since e they are not relevant to our analyses, that
 does not matter for our current purposes, but it’s worth remembering.
 
@@ -1785,6 +1795,12 @@ CSO_locs_15 <- read_excel(fpath, range = 'E3:AI6', col_names = FALSE)[-3,] %>%
   mutate(CSO = sub(' ', '_', CSO))
 ```
 
+    ## Warning: `as.tibble()` was deprecated in tibble 2.0.0.
+    ## Please use `as_tibble()` instead.
+    ## The signature and semantics have changed, see `?as_tibble`.
+    ## This warning is displayed once every 8 hours.
+    ## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was generated.
+
     ## New names:
     ## * `` -> ...1
     ## * `` -> ...2
@@ -1793,16 +1809,10 @@ CSO_locs_15 <- read_excel(fpath, range = 'E3:AI6', col_names = FALSE)[-3,] %>%
     ## * `` -> ...5
     ## * ...
 
-    ## Warning: `as.tibble()` is deprecated as of tibble 2.0.0.
-    ## Please use `as_tibble()` instead.
-    ## The signature and semantics have changed, see `?as_tibble`.
-    ## This warning is displayed once every 8 hours.
-    ## Call `lifecycle::last_warnings()` to see where this warning was generated.
-
     ## Warning: The `x` argument of `as_tibble.matrix()` must have unique column names if `.name_repair` is omitted as of tibble 2.0.0.
     ## Using compatibility `.name_repair`.
     ## This warning is displayed once every 8 hours.
-    ## Call `lifecycle::last_warnings()` to see where this warning was generated.
+    ## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was generated.
 
 ``` r
 CSO_locs_15
@@ -2600,9 +2610,9 @@ CSO_data_2015$thedate[CSO_data_2015$thedate == as.Date('2014-07-20')] <- as.Date
 
 ### Reprocess to Match Other File Format
 
-We use `pivot_longer()` -\> `Group_by()` -\> `summarize()`, followed by
-`pivot_wider()` to simplify application of similar aggregation functions
-to all the CSO locations.
+We use `pivot_longer()` -&gt; `Group_by()` -&gt; `summarize()`, followed
+by `pivot_wider()` to simplify application of similar aggregation
+functions to all the CSO locations.
 
 #### Step 1
 
@@ -2733,7 +2743,7 @@ CSO_data_missing <- read_excel(fpath,  skip = 5,
 ```
 
 | CSO      | Events | Unmeasured | Percent |
-| :------- | -----: | ---------: | ------: |
+|:---------|-------:|-----------:|--------:|
 | CSO\_002 |     35 |         35 |   100.0 |
 | CSO\_009 |     35 |         35 |   100.0 |
 | CSO\_011 |     35 |         35 |   100.0 |
@@ -2991,7 +3001,7 @@ CSO_data_2018$days[25] <- 2
 
 ### 2019 Data
 
-There is again one typogrphical error on the dates, where the year was
+There is again one typographical error on the dates, where the year was
 transcribed incorrectly.
 
 ``` r
@@ -3134,24 +3144,24 @@ CSO_data_2019$lastdate[CSO_data_2019$lastdate == as.Date('3019-06-11')] <- as.Da
 #### Subtract values “Assumed Captured by Tank”
 
 A number of values shown in the 2019 Excel data are confusing. All
-numbers associated with CSO 006, and CSO 007 are in RED. SOme discharge
+numbers associated with CSO 006, and CSO 007 are in RED. Some discharge
 numbers are listed in the Excel sheet, but also shown in “strike
-through”. The “strike through” values were subtracted from column
-(CSO) totals, but not from row (event) totals in the source Excel File.
+through”. The “strike through” values were subtracted from column (CSO)
+totals, but not from row (event) totals in the source Excel File.
 
 The failure to subtract these values them from the row totals may have
 been a partial oversight by PWD Staff. Annual Total discharges were
 calculated as the sum of the (corrected) column totals. It is not clear
 if the row (event) totals were reviewed.
 
-A Note at the bottom of the spreadsheet says: \> Note 3: Data in red
+A Note at the bottom of the spreadsheet says: &gt; Note 3: Data in red
 indicates volume after storage tank. Struckthrough results were assumed
 totally captured by tank. See notes for individual capture volumes.
 
 ##### Relevant Events
 
 | **Event** | **CSO\_006** | **CSO\_007** |
-| --------- | ------------ | ------------ |
+|-----------|--------------|--------------|
 | 3         | ~~78000~~    | 2585000      |
 | 12        | ~~32600~~    | 1567000      |
 | 26        | ~~3200~~     |              |
@@ -3203,6 +3213,11 @@ write_csv(CSO_data_15_19, 'Portland_CSO_data_2015_2019.csv')
 
 ## Calculate Totals by CSO
 
+We have to calculate summaries by CSO, which end up as separate columns,
+then pivot them longer, calculate separate CSO and Parameter values so
+we can work with them, and finally pivot back to wider format. Finally,
+we add the descriptive location names and reorder columns.
+
 ``` r
 data_by_cso <- CSO_data_15_19 %>%
   summarize(across(contains('CSO'),
@@ -3211,14 +3226,14 @@ data_by_cso <- CSO_data_15_19 %>%
                    Events2019 = ~ sum((! is.na(.x) & .x>0) *(Year == 2019), na.rm = TRUE),
                    Volume2019 = ~ sum(.x *(Year == 2019), na.rm = TRUE)),
                    .names = paste0('{.col}_{.fn}'))) %>%
-  t %>%         # t transposes, but also converts to an array, with dimnames
-  tibble(Item = dimnames(.)[[1]]) %>%
-  rename(Val = 1) %>%
-  mutate(group = sub('^.*_', '', Item),
-         CSO   = substr(Item, 1,7)) %>%
-  pivot_wider(id_cols = CSO, names_from = group, values_from = Val) %>%
+  pivot_longer(everything(), names_to = 'name', values_to = 'values') %>%
+  mutate (CSO = substr(name, 1, 7),
+          Parameter = substr(name, 9, nchar(name))) %>%
+  select(-name) %>%
+  pivot_wider(names_from  = Parameter, 
+              values_from = values, values_fill = 0) %>%
   inner_join(CSO_locs_15, by = 'CSO') %>%
-  select(CSO, Location, everything())
+  relocate(CSO, Location)
 ```
 
 ## Export File

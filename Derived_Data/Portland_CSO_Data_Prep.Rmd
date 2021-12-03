@@ -34,7 +34,7 @@ niece    <- file.path(sibling, niecenm)
 Notice that the DATES in these excel files are incorrect.  They are
 displayed in the spreadsheets as dates, showing only Month and Day, but the 
 underlying data is not necessarily from the year the data represents.  To
-correct for that, I assemble the date from day, month, and 
+correct for that, I assemble the date from day, month, and year.
 
 ## Find the Rain Files.
 ```{r}
@@ -94,7 +94,7 @@ anyway.
 
 # Write Rainfall Data File
 ## Combine Data
-There aught to be a way to automate this step so I don't have to write out each 
+There ought to be a way to automate this step so I don't have to write out each 
 name.
 ```{r}
 raindata <- raindata_2015 %>%
@@ -141,7 +141,7 @@ days.)
 Note also that the EEWTF wet weather flows are NOT reported by event. 
 
 Also note that there are non-numeric entries in the table which are informative,
-describing managmeent of teh CSOs.  Those entries will not read correctly here.
+describing managment of the CSOs.  Those entries will not read correctly here.
 Since e they are not relevant to our analyses, that does not matter for our
 current purposes, but it's worth remembering.
 
@@ -409,7 +409,7 @@ CSO_data_2018$days[25] <- 2
 ```
 
 ### 2019 Data
-There is again one typogrphical error on the dates, where the year was
+There is again one typographical error on the dates, where the year was
 transcribed incorrectly.
 ```{r 2019_data}
 fn <- "2019 Portland CSO Activity and Volumes - Final.xlsx"
@@ -442,7 +442,7 @@ CSO_data_2019$lastdate[CSO_data_2019$lastdate == as.Date('3019-06-11')] <- as.Da
 #### Subtract values "Assumed Captured by Tank"
 
 A number of values shown in the 2019 Excel data are confusing.  All numbers
-associated with CSO 006, and CSO 007 are in RED.  SOme discharge numbers are
+associated with CSO 006, and CSO 007 are in RED.  Some discharge numbers are
 listed in the Excel sheet, but also shown in "strike through". The "strike
 through" values were subtracted from column (CSO) totals, but not from row
 (event) totals in the source Excel File.
@@ -505,6 +505,10 @@ write_csv(CSO_data_15_19, 'Portland_CSO_data_2015_2019.csv')
 
 # Export Data for GIS
 ## Calculate Totals by CSO
+We have to calculate summaries by CSO, which end up as separate columns, then
+pivot them longer, calculate separate CSO and Parameter values so we can work
+with them, and finally pivot back to wider format. Finally, we add the
+descriptive location names and reorder columns.
 ```{r five_year_totals}
 data_by_cso <- CSO_data_15_19 %>%
   summarize(across(contains('CSO'),
@@ -513,14 +517,14 @@ data_by_cso <- CSO_data_15_19 %>%
                    Events2019 = ~ sum((! is.na(.x) & .x>0) *(Year == 2019), na.rm = TRUE),
                    Volume2019 = ~ sum(.x *(Year == 2019), na.rm = TRUE)),
                    .names = paste0('{.col}_{.fn}'))) %>%
-  t %>%         # t transposes, but also converts to an array, with dimnames
-  tibble(Item = dimnames(.)[[1]]) %>%
-  rename(Val = 1) %>%
-  mutate(group = sub('^.*_', '', Item),
-         CSO   = substr(Item, 1,7)) %>%
-  pivot_wider(id_cols = CSO, names_from = group, values_from = Val) %>%
+  pivot_longer(everything(), names_to = 'name', values_to = 'values') %>%
+  mutate (CSO = substr(name, 1, 7),
+          Parameter = substr(name, 9, nchar(name))) %>%
+  select(-name) %>%
+  pivot_wider(names_from  = Parameter, 
+              values_from = values, values_fill = 0) %>%
   inner_join(CSO_locs_15, by = 'CSO') %>%
-  select(CSO, Location, everything())
+  relocate(CSO, Location)
 ```
 
 
