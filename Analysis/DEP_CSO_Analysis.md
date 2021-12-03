@@ -43,11 +43,16 @@ Curtis C. Bohlen, Casco Bay Estuary Partnership
 
 ``` r
 library(tidyverse)
-#> -- Attaching packages --------------------------------------- tidyverse 1.3.0 --
-#> v ggplot2 3.3.3     v purrr   0.3.4
-#> v tibble  3.0.5     v dplyr   1.0.3
-#> v tidyr   1.1.2     v stringr 1.4.0
-#> v readr   1.4.0     v forcats 0.5.0
+#> Warning: package 'tidyverse' was built under R version 4.0.5
+#> -- Attaching packages --------------------------------------- tidyverse 1.3.1 --
+#> v ggplot2 3.3.5     v purrr   0.3.4
+#> v tibble  3.1.6     v dplyr   1.0.7
+#> v tidyr   1.1.4     v stringr 1.4.0
+#> v readr   2.1.0     v forcats 0.5.1
+#> Warning: package 'ggplot2' was built under R version 4.0.5
+#> Warning: package 'tidyr' was built under R version 4.0.5
+#> Warning: package 'dplyr' was built under R version 4.0.5
+#> Warning: package 'forcats' was built under R version 4.0.5
 #> -- Conflicts ------------------------------------------ tidyverse_conflicts() --
 #> x dplyr::filter() masks stats::filter()
 #> x dplyr::lag()    masks stats::lag()
@@ -57,7 +62,7 @@ load_cbep_fonts()
 theme_set(theme_cbep())
 
 library(corrplot)
-#> corrplot 0.84 loaded
+#> corrplot 0.91 loaded
 
 library(mblm)  # Includes a Theil-Sen estimator, and an extension by Seigel
 ```
@@ -245,15 +250,15 @@ What jumps out is:
 1.  Year is negatively correlated with volume and events
 2.  Year is positively (though not strongly) correlated with
     precipitation.
-3.  Total CSO VOlumes and Events statewide are dropping even faster than
-    in our region, so the percentage of the states CSOs from her is
+3.  Total CSO Volumes and Events statewide are dropping even faster than
+    in our region, so the percentage of the states CSOs from here is
     climbing.
 4.  Volume and number of CSO events are correlated across the region.
     Bad years in one jurisdiction are bad for many.
 5.  Portland’s CSOs are a big enough part of regional and state-wide
-    totals so that they are always highly correlated with totals. The
-    precipitation variables are not all that highly correlated with the
-    other variables, but that
+    totals so that they are always highly correlated with totals.  
+6.  The precipitation variables are not all that highly correlated with
+    the other variables.
 
 # Generate Models and Extract Coefficients
 
@@ -319,19 +324,17 @@ res <- cb_towns_data_long %>%
         # untransformed values, since Kendal's Tau, which is based on order, not 
         # magnitude.
   select(-tsCortest)
-#> Warning: Problem with `mutate()` input `tsCortest`.
-#> i Cannot compute exact p-value with ties
-#> i Input `tsCortest` is `(map(data, function(df) cor.test(df$Year, df$Volume, method = "kendall")))`.
-#> i The error occurred in group 1: Community = "Cape Elizabeth".
+#> Warning in cor.test.default(df$Year, df$Volume, method = "kendall"): Cannot
+#> compute exact p-value with ties
 res
 #> # A tibble: 4 x 13
 #> # Groups:   Community [4]
-#>   Community data  mylm  lmslope   lmsd    tlm     lmp myts  tsslope  tscor
-#>   <chr>     <lis> <lis>   <dbl>  <dbl>  <dbl>   <dbl> <lis>   <dbl>  <dbl>
-#> 1 Cape Eli~ <tib~ <lm>  -0.0405 0.0766 -0.529 6.02e-1 <mbl~  -0.226 -0.323
-#> 2 Portland~ <tib~ <lm>  -0.0725 0.0158 -4.58  1.63e-4 <mbl~ -45.5   -0.502
-#> 3 South Po~ <tib~ <lm>  -0.0981 0.0275 -3.57  1.82e-3 <mbl~  -1.24  -0.470
-#> 4 Westbrook <tib~ <lm>   0.0108 0.0625  0.172 8.65e-1 <mbl~  -0.532 -0.138
+#>   Community      data   mylm  lmslope   lmsd    tlm     lmp myts  tsslope  tscor
+#>   <chr>          <list> <lis>   <dbl>  <dbl>  <dbl>   <dbl> <lis>   <dbl>  <dbl>
+#> 1 Cape Elizabeth <tibb~ <lm>  -0.0405 0.0766 -0.529 6.02e-1 <mbl~  -0.226 -0.323
+#> 2 Portland & PWD <tibb~ <lm>  -0.0725 0.0158 -4.58  1.63e-4 <mbl~ -45.5   -0.502
+#> 3 South Portland <tibb~ <lm>  -0.0981 0.0275 -3.57  1.82e-3 <mbl~  -1.24  -0.470
+#> 4 Westbrook      <tibb~ <lm>   0.0108 0.0625  0.172 8.65e-1 <mbl~  -0.532 -0.138
 #> # ... with 3 more variables: tsp <dbl>, mylogts <list>, tslogslope <dbl>
 ```
 
