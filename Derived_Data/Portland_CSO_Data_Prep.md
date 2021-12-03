@@ -74,7 +74,7 @@ Notice that the DATES in these excel files are incorrect. They are
 displayed in the spreadsheets as dates, showing only Month and Day, but
 the underlying data is not necessarily from the year the data
 represents. To correct for that, I assemble the date from day, month,
-and
+and year.
 
 ## Find the Rain Files.
 
@@ -1698,7 +1698,7 @@ drop anyway.
 
 ## Combine Data
 
-There aught to be a way to automate this step so I don’t have to write
+There ought to be a way to automate this step so I don’t have to write
 out each name.
 
 ``` r
@@ -1766,8 +1766,8 @@ reported over multiple days.)
 Note also that the EEWTF wet weather flows are NOT reported by event.
 
 Also note that there are non-numeric entries in the table which are
-informative, describing managmeent of teh CSOs. Those entries will not
-read correctly here. Since e they are not relevant to our analyses, that
+informative, describing management of the CSOs. Those entries will not
+read correctly here. Since they are not relevant to our analyses, that
 does not matter for our current purposes, but it’s worth remembering.
 
 ### List Locations
@@ -2991,7 +2991,7 @@ CSO_data_2018$days[25] <- 2
 
 ### 2019 Data
 
-There is again one typogrphical error on the dates, where the year was
+There is again one typographical error on the dates, where the year was
 transcribed incorrectly.
 
 ``` r
@@ -3134,7 +3134,7 @@ CSO_data_2019$lastdate[CSO_data_2019$lastdate == as.Date('3019-06-11')] <- as.Da
 #### Subtract values “Assumed Captured by Tank”
 
 A number of values shown in the 2019 Excel data are confusing. All
-numbers associated with CSO 006, and CSO 007 are in RED. SOme discharge
+numbers associated with CSO 006, and CSO 007 are in RED. Some discharge
 numbers are listed in the Excel sheet, but also shown in “strike
 through”. The “strike through” values were subtracted from column
 (CSO) totals, but not from row (event) totals in the source Excel File.
